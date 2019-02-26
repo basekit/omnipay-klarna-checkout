@@ -69,6 +69,14 @@ abstract class AbstractOrderRequest extends AbstractRequest
     }
 
     /**
+     * @return array
+     */
+    public function getShippingOptions()
+    {
+        return $this->getParameter('shipping_options');
+    }
+
+    /**
      * @return WidgetOptions|null
      */
     public function getWidgetOptions()
@@ -173,6 +181,18 @@ abstract class AbstractOrderRequest extends AbstractRequest
     }
 
     /**
+     * @param array $shippingOptions
+     *
+     * @return $this
+     */
+    public function setShippingOptions($shippingOptions): self
+    {
+        $this->setParameter('shipping_options', $shippingOptions);
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     protected function getOrderData(): array
@@ -187,6 +207,10 @@ abstract class AbstractOrderRequest extends AbstractRequest
 
         if (null !== $locale = $this->getLocale()) {
             $data['locale'] = str_replace('_', '-', $locale);
+        }
+
+        if (null !== $shippingOptions = $this->getShippingOptions()) {
+            $data['shipping_options'] = $shippingOptions;
         }
 
         if (null !== $shippingCountries = $this->getShippingCountries()) {

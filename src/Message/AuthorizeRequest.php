@@ -30,7 +30,6 @@ final class AuthorizeRequest extends AbstractOrderRequest
             'purchase_country',
             'tax_amount'
         );
-
         $data = $this->getOrderData();
         $data['merchant_urls'] = $this->getMerchantUrls();
 
